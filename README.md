@@ -23,11 +23,6 @@ void init(void){
 	ADCSRA =1<<ADEN|1<<ADPS1|1<<ADPS0;
 	ADMUX = 1<<REFS0|1<<MUX1;
 }
-# Pin inti for three ranges
-DDR_RES = DDR_RES |1<<0;
-	PORT_RES = PORT_RES & ~(1<<0);
-	DDR_RES = DDR_RES & ~(1<<1);
-	DDR_RES = DDR_RES & ~(1<<2);
 # ADC conversion
 ADCSRA = ADCSRA|(1<<ADSC); //start convertion
 		while((ADCSRA & (1<<ADSC))==0);//wait for finish
