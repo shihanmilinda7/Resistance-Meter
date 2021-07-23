@@ -55,34 +55,25 @@ void blink_led(void){
 	}
 }
 # Pin Intialize for three ranges
-## Ohm range
 void ohm_range(void){
 	DDR_RES = DDR_RES |1<<0;
 	PORT_RES = PORT_RES & ~(1<<0);
 	DDR_RES = DDR_RES & ~(1<<1);
 	DDR_RES = DDR_RES & ~(1<<2);
-	res_val = (5000-ang_val)*100/(ang_val);
-	res_val2=res_val;
-	
 }
-## kOhm range
 void kilo_range(void){
 	DDR_RES= DDR_RES |1<<1;
 	PORT_RES = PORT_RES & ~(1<<1);
 	DDR_RES = DDR_RES & ~(1<<0);
 	DDR_RES = DDR_RES & ~(1<<2);
-	res_val = (5000-ang_val)*1000/(ang_val);
-	res_val2=res_val;
 }
-## 10kOhm range
 void tenkilo_range(void){
 	DDR_RES = DDR_RES |1<<2;
 	PORT_RES = PORT_RES & ~(1<<2);
 	DDR_RES = DDR_RES & ~(1<<1);
 	DDR_RES = DDR_RES & ~(1<<0);
-	res_val = (5000-ang_val)*10000/(ang_val);
-	res_val2=res_val/10;
 }
+
 ## 4 digit init
 void ssd(void){
 
