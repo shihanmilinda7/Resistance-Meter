@@ -1,5 +1,19 @@
 # Resistance-Meter
 This was programed with C programming. This can be use for measure unknow resister value. There 3 ranges which are Ohm range, kOhm range and 10kOhm range.  This was program for ATMega 32A microcontroller. Here I used inbuild ADC converter of microcontroller. 
+# pin definition
+#define DDR_SEG DDRB
+
+#define DIG0_PORT PORTD
+#define PORT_SEG PORTB
+#define DIG0_DDR DDRD
+#define DDR_LED DDRC
+#define DDR_RES DDRC
+#define PORT_RES PORTC
+
+#define DIG0_NO 0
+#define DIG1_NO 1
+#define DIG2_NO 2
+#define DIG3_NO 3
 # Basic inits
 void init(void){
 	DDR_SEG = 0xff;//make as output
@@ -9,6 +23,11 @@ void init(void){
 	ADCSRA =1<<ADEN|1<<ADPS1|1<<ADPS0;
 	ADMUX = 1<<REFS0|1<<MUX1;
 }
+# Pin inti for three ranges
+DDR_RES = DDR_RES |1<<0;
+	PORT_RES = PORT_RES & ~(1<<0);
+	DDR_RES = DDR_RES & ~(1<<1);
+	DDR_RES = DDR_RES & ~(1<<2);
 # ADC conversion
 ADCSRA = ADCSRA|(1<<ADSC); //start convertion
 		while((ADCSRA & (1<<ADSC))==0);//wait for finish
@@ -54,26 +73,6 @@ void blink_led(void){
 		resister=10000;
 	}
 }
-# Pin Intialize for three ranges
-void ohm_range(void){
-	DDR_RES = DDR_RES |1<<0;
-	PORT_RES = PORT_RES & ~(1<<0);
-	DDR_RES = DDR_RES & ~(1<<1);
-	DDR_RES = DDR_RES & ~(1<<2);
-}
-void kilo_range(void){
-	DDR_RES= DDR_RES |1<<1;
-	PORT_RES = PORT_RES & ~(1<<1);
-	DDR_RES = DDR_RES & ~(1<<0);
-	DDR_RES = DDR_RES & ~(1<<2);
-}
-void tenkilo_range(void){
-	DDR_RES = DDR_RES |1<<2;
-	PORT_RES = PORT_RES & ~(1<<2);
-	DDR_RES = DDR_RES & ~(1<<1);
-	DDR_RES = DDR_RES & ~(1<<0);
-}
-
 ## 4 digit init
 void ssd(void){
 
